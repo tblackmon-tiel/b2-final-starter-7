@@ -12,8 +12,8 @@ RSpec.describe "Bulk Discounts edit page", type: :feature do
 
   describe "When I visit the merchant's bulk discount edit page" do
     it "I see a form prefilled with the attributes of the bulk discount, to edit the discount" do
-      expect(page).to have_field("percent", text: 10)
-      expect(page).to have_field("quantity", text: 10)
+      expect(page).to have_field("percent", with: 10)
+      expect(page).to have_field("quantity", with: 10)
 
       fill_in "percent", with: 12
       fill_in "quantity", with: 15

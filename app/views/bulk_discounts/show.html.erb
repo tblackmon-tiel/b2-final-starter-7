@@ -1,5 +1,7 @@
 <h1>Overview of Discount #<%= @discount.id %></h1>
 
+<%= link_to "Edit This Discount", edit_merchant_bulk_discount_path(params[:merchant_id], @discount) %>
+
 <ul>
   <li>Discount percent: <%= @discount.percent %>%</li>
   <li>Quantity threshold: <%= @discount.quantity %> items</li>

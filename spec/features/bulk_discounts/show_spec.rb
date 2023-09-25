@@ -20,7 +20,7 @@ RSpec.describe "Bulk Discounts show page", type: :feature do
       expect(page).to have_link("Edit This Discount")
       click_link("Edit This Discount")
 
-      expect(page).to have_current_path("/mechants/#{@merchant1.id}/bulk_discounts/#{@discount_1.id}/edit")
+      expect(page).to have_current_path("/merchants/#{@merchant1.id}/bulk_discounts/#{@discount_1.id}/edit")
     end
   end
 end
