@@ -41,7 +41,7 @@ RSpec.describe "Bulk discounts index page", type: :feature do
     @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
 
     @discount_1 = BulkDiscount.create!(percent: 10, quantity: 10, merchant_id: @merchant1.id)
-    @discount_1 = BulkDiscount.create!(percent: 12, quantity: 15, merchant_id: @merchant1.id)
+    @discount_2 = BulkDiscount.create!(percent: 12, quantity: 15, merchant_id: @merchant1.id)
 
     visit merchant_bulk_discounts_path(@merchant1)
   end
