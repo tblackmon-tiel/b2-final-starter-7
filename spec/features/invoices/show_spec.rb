@@ -100,4 +100,10 @@ RSpec.describe "invoices show" do
     end
   end
 
+  it "shows the discounted revenue separately from the total revenue for the invoice" do
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+    
+    expect(page).to have_content(@invoice_1.discounted_revenue)
+  end
+
 end
