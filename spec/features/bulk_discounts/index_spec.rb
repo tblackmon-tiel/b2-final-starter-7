@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Bulk discounts show page", type: :feature do
+RSpec.describe "Bulk discounts index page", type: :feature do
   before(:each) do
     @merchant1 = Merchant.create!(name: "Hair Care")
 
@@ -45,7 +45,7 @@ RSpec.describe "Bulk discounts show page", type: :feature do
     visit merchant_bulk_discounts_path(@merchant1)
   end
 
-  describe "When I visit my merchant's bulk discount show page" do
+  describe "When I visit my merchant's bulk discount index page" do
     it "I see all of my bulk discounts, including their percentage and quantity thresholds" do
       expect(page).to have_content("Discount percent: #{@discount_1.percent}%")
       expect(page).to have_content("Quantity threshold: #{@discount_1.quantity} items")
@@ -53,6 +53,10 @@ RSpec.describe "Bulk discounts show page", type: :feature do
 
     it "each bulk discount listed includes a link to its show page" do
       expect(page).to have_link("Discount ##{@discount_1.id}")
+    end
+
+    it "has a link to create a new bulk discount" do
+      expect(page).to have_link("Create a New Discount")
     end
   end
 end
