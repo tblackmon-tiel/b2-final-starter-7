@@ -41,6 +41,7 @@ RSpec.describe "Bulk discounts index page", type: :feature do
     @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
 
     @discount_1 = BulkDiscount.create!(percent: 10, quantity: 10, merchant_id: @merchant1.id)
+    @discount_1 = BulkDiscount.create!(percent: 12, quantity: 15, merchant_id: @merchant1.id)
 
     visit merchant_bulk_discounts_path(@merchant1)
   end
@@ -49,14 +50,32 @@ RSpec.describe "Bulk discounts index page", type: :feature do
     it "I see all of my bulk discounts, including their percentage and quantity thresholds" do
       expect(page).to have_content("Discount percent: #{@discount_1.percent}%")
       expect(page).to have_content("Quantity threshold: #{@discount_1.quantity} items")
+      expect(page).to have_content("Discount percent: #{@discount_2.percent}%")
+      expect(page).to have_content("Quantity threshold: #{@discount_2.quantity} items")
     end
 
     it "each bulk discount listed includes a link to its show page" do
       expect(page).to have_link("Discount ##{@discount_1.id}")
+      expect(page).to have_link("Discount ##{@discount_2.id}")
     end
 
     it "has a link to create a new bulk discount" do
       expect(page).to have_link("Create a New Discount")
+    end
+
+    it "has a button to delete each individual bulk discount" do
+      within("#discount-#{@discount_1.id}") do
+        expect(page).to have_button("Delete Discount")
+      end
+
+      within("#discount-#{@discount_2.id}") do
+        expect(page).to have_button("Delete Discount")
+        click_button("Delete Discount")
+      end
+
+      expect(page).to have_current_path("/merchants/#{@merchant1.id}/bulk_discounts")
+      expect(page).to have_selector("#discount-#{@discount_1.id}")
+      expect(page).not_to have_selector("#discount-#{@discount_2.id}")
     end
   end
 end
