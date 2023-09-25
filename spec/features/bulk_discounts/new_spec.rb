@@ -4,7 +4,7 @@ RSpec.describe "merchant's bulk discount new page", type: :feature do
   before(:each) do
     @merchant1 = Merchant.create!(name: "Hair Care")
 
-    visit new_merchant_bulk_discount_path(@merchant)
+    visit new_merchant_bulk_discount_path(@merchant1)
   end
 
   describe "When I visit the merchant's bulk discount new page" do
