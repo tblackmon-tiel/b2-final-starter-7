@@ -42,7 +42,7 @@ RSpec.describe "Bulk discounts show page", type: :feature do
 
     @discount_1 = BulkDiscount.create!(percent: 10, quantity: 10, merchant_id: @merchant1.id)
 
-    visit merchant_discount_index_path(@merchant1)
+    visit merchant_bulk_discounts_path(@merchant1)
   end
 
   describe "When I visit my merchant's bulk discount show page" do
