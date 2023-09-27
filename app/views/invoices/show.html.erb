@@ -27,6 +27,7 @@
         <th class="th1">Quantity</th>
         <th class="th1">Unit Price</th>
         <th class="th1">Status</th>
+        <th class="th1">Applied Discount</th>
       </tr>
     </thead>
 
@@ -43,6 +44,7 @@
                 <%= f.submit 'Update Invoice' %>
               <% end %>
               </td>
+            <td style="text-align:center"><%= i.discount_id ? link_to("View Applied Discount", merchant_bulk_discount_path(@merchant, i.discount_id.id)) : "" %></td>
           </tr>
         </section>
       <% end %>

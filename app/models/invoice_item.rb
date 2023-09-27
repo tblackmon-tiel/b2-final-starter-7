@@ -22,6 +22,6 @@ class InvoiceItem < ApplicationRecord
       .select("bulk_discounts.id")
       .where("#{self.quantity} >= bulk_discounts.quantity")
       .order("bulk_discounts.percent DESC")
-      .limit(1).first.id
+      .limit(1).first
   end
 end

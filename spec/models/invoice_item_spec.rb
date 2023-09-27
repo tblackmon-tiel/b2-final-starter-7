@@ -11,6 +11,8 @@ RSpec.describe InvoiceItem, type: :model do
   describe "relationships" do
     it { should belong_to :invoice }
     it { should belong_to :item }
+    it { should have_one(:merchant).through(:item) }
+    it { should have_many(:bulk_discounts).through(:merchant) }
   end
 
   describe "class methods" do
@@ -54,8 +56,8 @@ RSpec.describe InvoiceItem, type: :model do
         @discount_1 = BulkDiscount.create!(percent: 10, quantity: 5, merchant_id: @m1.id)
         @discount_2 = BulkDiscount.create!(percent: 20, quantity: 10, merchant_id: @m1.id)
 
-        expect(@ii_1.discount_id).to eq(@discount_2.id)
-        expect(@ii_2.discount_id).to eq(@discount_1.id)
+        expect(@ii_1.discount_id.id).to eq(@discount_2.id)
+        expect(@ii_2.discount_id.id).to eq(@discount_1.id)
       end
     end
   end
