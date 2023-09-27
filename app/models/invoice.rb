@@ -37,8 +37,8 @@ class Invoice < ApplicationRecord
             join invoice_items on invoices.id = invoice_items.invoice_id 
             join items on items.id = invoice_items.item_id 
             join merchants on merchants.id = items.merchant_id 
-            join bulk_discounts on merchants.id = bulk_discounts.merchant_id
-          where invoices.id = #{self.id} and invoice_items.quantity < (select MIN(quantity) from bulk_discounts where merchant_id = #{merchant_id})
+            left join bulk_discounts on merchants.id = bulk_discounts.merchant_id
+          where invoices.id = #{self.id} and (invoice_items.quantity < (select MIN(quantity) from bulk_discounts where merchant_id = #{merchant_id}) or bulk_discounts.quantity is null)
           group by invoice_items.id
           ) as no_discount"
     ).first.revenue
