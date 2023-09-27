@@ -13,9 +13,14 @@ class BulkDiscountsController < ApplicationController
 
   def create
     discount = BulkDiscount.new(percent: params[:percent], quantity: params[:quantity], merchant_id: params[:merchant_id])
-    discount.save
+    if discount.save
+      flash[:success] = ""
+      redirect_to merchant_bulk_discounts_path(params[:merchant_id])
+    else
+      flash[:error] = "The discount could not be created. Please fill out the form entirely!"
+      render :new
+    end
 
-    redirect_to merchant_bulk_discounts_path(params[:merchant_id])
   end
 
   def destroy
