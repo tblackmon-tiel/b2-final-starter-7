@@ -21,5 +21,12 @@ RSpec.describe "merchant's bulk discount new page", type: :feature do
       expect(page).to have_content("Discount percent: 20%")
       expect(page).to have_content("Quantity threshold: 12 items")
     end
+
+    it "if the form is not entirely filled out, an error message is displayed" do
+      fill_in "percent", with: 20
+      click_button "Create Discount"
+
+      expect(page).to have_content("The discount could not be created. Please fill out the form entirely!")
+    end
   end
 end
