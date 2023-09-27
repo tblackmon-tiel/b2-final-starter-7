@@ -32,4 +32,8 @@ class Invoice < ApplicationRecord
   def standard_revenue
     invoice_items.joins(:bulk_discounts).where("invoice_items.quantity < bulk_discounts.quantity").sum("invoice_items.unit_price * invoice_items.quantity")
   end
+
+  def total_discounted_revenue
+    self.discounted_revenue.revenue + self.standard_revenue
+  end
 end
