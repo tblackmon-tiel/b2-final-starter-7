@@ -1,5 +1,7 @@
 <h1>Overview of Discount #<%= @discount.id %></h1>
 
+<%= link_to "Back to All Discounts", merchant_bulk_discounts_path %>
+<br><br>
 <%= link_to "Edit This Discount", edit_merchant_bulk_discount_path(params[:merchant_id], @discount) %>
 
 <ul>
